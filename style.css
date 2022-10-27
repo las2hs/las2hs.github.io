@@ -36,6 +36,10 @@ nav{
     max-width: 400px;
 }
 
+.pic2{
+    float: center;
+}
+
 .nav-links{
     padding: 28px 0;
     font-size: 200%;
