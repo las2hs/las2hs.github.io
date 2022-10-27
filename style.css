@@ -38,10 +38,10 @@ nav{
 
 .pic2{
     float: center;
-    width: 50%;
+    width: 30%;
     padding-left: 5%;
     min-width: 250px;
-    max-width: 800px;
+    max-width: 400px;
 }
 
 .nav-links{
