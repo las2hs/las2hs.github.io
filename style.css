@@ -37,7 +37,7 @@ nav{
 }
 
 .pic2{
-    width: 70%;
+    width: 100%;
   display: block;
   margin-left: auto;
   margin-right: auto;
@@ -100,7 +100,10 @@ nav{
 }
 
 .caption{
-    font-size:  50%;
+    font-size:  65%;
+      display: block;
+      margin-left: auto;
+      margin-right: auto;
 }
 
 .pub-list li{
@@ -113,6 +116,10 @@ a{
 
 a:hover{
     color: #232D4B;
+}
+
+title{
+    font-size: 80%;
 }
 
 iframe{
