@@ -41,9 +41,9 @@ nav{
   display: block;
   margin-left: auto;
   margin-right: auto;
-    padding-left: 5%;
+    padding-left: 5%;/*
     min-width: 250px;
-    max-width: 400px;
+    max-width: 400px;*/
 }
 
 .nav-links{
