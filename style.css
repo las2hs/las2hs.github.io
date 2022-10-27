@@ -37,8 +37,10 @@ nav{
 }
 
 .pic2{
-    float: center;
-    width: 40%;
+    width: 70%;
+  display: block;
+  margin-left: auto;
+  margin-right: auto;
     padding-left: 5%;
     min-width: 250px;
     max-width: 400px;
