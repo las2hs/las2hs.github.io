@@ -101,9 +101,7 @@ nav{
 
 .caption{
     font-size:  65%;
-      display: block;
-      margin-left: auto;
-      margin-right: auto;
+    text-align:  center;
 }
 
 .pub-list li{
@@ -119,7 +117,7 @@ a:hover{
 }
 
 title{
-    font-size: 80%;
+    font-size: 60%;
 }
 
 iframe{
