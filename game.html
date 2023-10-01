@@ -4,17 +4,94 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Bingo Button</title>
+    <title>HUMANITIES PHD SIMULATOR</title>
+    <style>
+        body {
+            font-family: Arial, sans-serif;
+            text-align: center;
+            padding-top: 50px;
+        }
+        .title {
+            font-size: 24px;
+            font-weight: bold;
+            margin-bottom: 20px;
+        }
+        .choice {
+            display: none;
+        }
+        button {
+            margin: 10px;
+        }
+    </style>
 </head>
 
 <body>
-    <button onclick="showNotification()">Click Me!</button>
+<div class="title">HUMANITIES PHD SIMULATOR</div>
+<button id="takePhdBtn" onclick="takePhd()">Take the Ph.D.</button>
+<button id="dontTakePhdBtn" onclick="dontTakePhd()">Don't take the Ph.D.</button>
 
-    <script>
-        function showNotification() {
-            alert("Bingo!");
+<!-- Choice of specialty -->
+<div class="choice" id="fieldChoice">
+    <p>Select your specialization:</p>
+    <button onclick="selectSpecialty('Medievalist')">Medievalist</button>
+    <button onclick="selectSpecialty('Americanist')">Americanist</button>
+    <button onclick="selectSpecialty('Modernist')">Modernist</button>
+    <button onclick="selectSpecialty('Theory Person')">Theory Person</button>
+</div>
+
+<!-- Display specialty and current year/month -->
+<div class="choice" id="statusPage">
+    <p>Your specialty: <span id="specialtyDisplay"></span></p>
+    <p>Year: <span id="yearCount">1</span>, Month: <span id="monthCount">1</span></p>
+    <button onclick="resetGame()">Reset</button>
+</div>
+
+<script>
+    let specialty = ''; // Store the chosen specialty
+
+    function takePhd() {
+        // Hide the initial buttons
+        document.getElementById('takePhdBtn').style.display = 'none';
+        document.getElementById('dontTakePhdBtn').style.display = 'none';
+
+        // Show the field choices.
+        document.querySelector('#fieldChoice').style.display = 'block';
+    }
+
+    function dontTakePhd() {
+        alert("You chose a different path. Best of luck!");
+    }
+
+    function selectSpecialty(s) {
+        specialty = s;
+        
+        if (s === 'Modernist') {
+            alert("Oops! You chose Modernist. Game over.");
+            return;
         }
-    </script>
+
+        // Update the display with chosen specialty
+        document.getElementById('specialtyDisplay').innerText = specialty;
+
+        // Hide field choices and show the status page.
+        document.getElementById('fieldChoice').style.display = 'none';
+        document.getElementById('statusPage').style.display = 'block';
+    }
+
+    function resetGame() {
+        // Reset the game to its initial state
+        specialty = '';
+        document.getElementById('specialtyDisplay').innerText = '';
+        document.getElementById('yearCount').innerText = '1';
+        document.getElementById('monthCount').innerText = '1';
+        document.getElementById('statusPage').style.display = 'none';
+        document.getElementById('fieldChoice').style.display = 'none';
+        document.getElementById('takePhdBtn').style.display = 'block';
+        document.getElementById('dontTakePhdBtn').style.display = 'block';
+    }
+</script>
+
+
 </body>
 
 </html>
