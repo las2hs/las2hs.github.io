@@ -27,8 +27,8 @@
 
 <body>
 <div class="title">HUMANITIES PHD SIMULATOR</div>
-<button id="takePhdBtn" onclick="takePhd()">Take the Ph.D.</button>
-<button id="dontTakePhdBtn" onclick="dontTakePhd()">Don't take the Ph.D.</button>
+<button id="takePhdBtn" onclick="takePhd()">Begin the Ph.D.</button>
+<button id="dontTakePhdBtn" onclick="dontTakePhd()">Don't begin the Ph.D.</button>
 
 <!-- Choice of specialty -->
 <div class="choice" id="fieldChoice">
@@ -59,14 +59,15 @@
     }
 
     function dontTakePhd() {
-        alert("You chose a different path. Best of luck!");
-    }
+    document.body.innerHTML = '<div style="font-size: 24px; font-weight: bold; padding-top: 50px; text-align: center;">Probably a good choice.</div>';
+}
+
 
     function selectSpecialty(s) {
         specialty = s;
         
         if (s === 'Modernist') {
-            alert("Oops! You chose Modernist. Game over.");
+            resetGame()
             return;
         }
 
