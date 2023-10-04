@@ -1,31 +1,23 @@
-<!DOCTYPE html>
-<html lang="en">
+<style>
+    body {
+        font-family: Arial, sans-serif;
+        text-align: center;
+        padding-top: 50px;
+    }
+    .title {
+        font-size: 24px;
+        font-weight: bold;
+        margin-bottom: 20px;
+    }
+    .choice {
+        display: none;  /* Setting it to none initially */
+    }
+    button {
+        margin: 10px;
+    }
+</style>
 
-<head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>ENGLISH PHD SIMULATOR</title>
-    <style>
-        body {
-            font-family: Arial, sans-serif;
-            text-align: center;
-            padding-top: 50px;
-        }
-        .title {
-            font-size: 24px;
-            font-weight: bold;
-            margin-bottom: 20px;
-        }
-        .choice {
-            display: none;
-        }
-        button {
-            margin: 10px;
-        }
-    </style>
-</head>
 
-<body>
 <div class="title">ENGLISH PHD SIMULATOR</div>
 <button id="takePhdBtn" onclick="takePhd()">Begin the Ph.D.</button>
 <button id="dontTakePhdBtn" onclick="dontTakePhd()">Don't begin the Ph.D.</button>
@@ -38,61 +30,213 @@
     <button onclick="selectSpecialty('Modernist')">Modernist</button>
     <button onclick="selectSpecialty('Theory Person')">Theory Person</button>
 </div>
-
-<!-- Display specialty and current year/month -->
+<!-- Enhanced Status Page -->
 <div class="choice" id="statusPage">
     <p>Your specialty: <span id="specialtyDisplay"></span></p>
-    <p>Year: <span id="yearCount">1</span>, Month: <span id="monthCount">1</span></p>
-    <button onclick="resetGame()">Reset</button>
+    <p>Year: <span id="yearCount">1</span>, Week: <span id="weekCount">1</span></p>
+    <p>Happiness: <span id="happiness">50</span>%</p>
+    <p>Performance in Class 1: <span id="class1Performance">0</span>%</p>
+    <p>Performance in Class 2: <span id="class2Performance">0</span>%</p>
+    <p>Performance in Class 3: <span id="class3Performance">0</span>%</p>
+
+    
+     <div id="actionChoices">
+        <p>Choose an action for the week:</p>
+        <!-- Class buttons will be toggled based on the week number -->
+        <div id="classChoices">
+            <button onclick="performAction('Class 1')">Work on Class 1</button>
+            <button onclick="performAction('Class 2')">Work on Class 2</button>
+            <button onclick="performAction('Class 3')">Work on Class 3</button>
+        </div>
+        <button onclick="performAction('Social Life')">Focus on Social Life</button>
+        <button id="readIntenselyBtn" onclick="performAction('Read Intensely')" style="display: none;">Read Intensely in Your Field</button>
+        <button onclick="resetGame()">Reset</button>
+        <p>Classes you can get a rec letter from:</p>
+    <ol id="recLetterClasses"></ol>
+    </div>
 </div>
 
 <script>
+    const classes1 = ["Shakespeare", "Donne", "Milton", "Romanticism", "Fairy Tales", "Jane Austen", "Sex", "Sentimentalism", "James Joyce", "Zora Neale Hurston", "Frank Kermode", "James Baldwin", "Lorraine Hansberry", "The Harlem Renaissance", "John Wayne", "The Refugee", "Hart Crane", "High Modernism", "Sartorial Erotics", "Melodrama", "18th-Century Fiction", "The New Hollywood", "Mimesis", "Derrida", "Foucault", "Freud", "Plato", "Djuna Barnes", "Indigeneity", "Queer Theory", "Irish Literature", "Caribbean Literature", "Eduoard Glissant", "Zitkala-Sa", "Percy Shelley", "The Western Canon", "Harry Potter", "Fornication", "World Literature", "Old English Literature", "Chaucer", "Margaret Mitchell", "Photography", "Phenomenology", "Hegel", "Marx", "The Talking Heads", "Food Studies"];
+    const classes2 = [" and Queerness", " and the Anthropocene and You!", " and Marxism", ": an Introduction", " and Sex", " and Ecology", " and the Novel", " on Film", " and Jordan Peterson", " and the Problem of Politics", " and Poetic Form", " and the End of History", "and Neoliberalism", " and Afropessimism", " and Foucault", " and the Birth of the American Republic", ": Beyond the Pleasure Principle", " and the American Civil War", " since the Battle of Hastings", " since 1800", " since 2001", ": an Ecocritical Account", " since 900 AD", " since the Birth of Christ", " after 1848", " before the fall of the Berlin Wall", " and Ecofeminism", " and the Feminine Mystique", " and the Men's Rights Movement", " and Sports", ": a Transnational Account", " and the Literature of Hatred"];
+
+    let week = 1;
     let specialty = ''; // Store the chosen specialty
+    let happiness = 50;  // Start with 50% happiness
+    let year = 1;
+    let class1Performance = 0;
+    let class2Performance = 0;
+    let class3Performance = 0;
+    let recLetterClasses = [];
+    let combinedClassNames = [];
+
+function getRandomIntInRange(min, max) {
+    return Math.floor(Math.random() * (max - min + 1)) + min;
+}
+
+function performAction(action) {
+    switch(action) {
+        case 'Class 1':
+            class1Performance += getRandomIntInRange(6, 15);
+            class2Performance -= getRandomIntInRange(1, 3);
+            class3Performance -= getRandomIntInRange(1, 3);
+            happiness -= getRandomIntInRange(3, 6);
+            break;
+        case 'Class 2':
+            class2Performance += getRandomIntInRange(6, 15);
+            class1Performance -= getRandomIntInRange(1, 3);
+            class3Performance -= getRandomIntInRange(1, 3);
+            happiness -= getRandomIntInRange(3, 6);
+            break;
+        case 'Class 3':
+            class3Performance += getRandomIntInRange(6, 15);
+            class1Performance -= getRandomIntInRange(1, 3);
+            class2Performance -= getRandomIntInRange(1, 3);
+            happiness -= getRandomIntInRange(3, 6);
+            break;
+        case 'Social Life':
+            happiness += getRandomIntInRange(6, 10);  // Increased happiness can also be randomized
+            class1Performance -= getRandomIntInRange(1, 2);
+            class2Performance -= getRandomIntInRange(1, 2);
+            class3Performance -= getRandomIntInRange(1, 2);
+            break;
+        // ... rest of the code
+
+            case 'Read Intensely':
+                // You can add effects for this action if needed
+                break;
+            // ... [rest of the code for the other actions]
+        }
+        
+        happiness = Math.min(Math.max(happiness, 0), 100);
+        if(happiness <= 0) {
+            endGame();
+            return;
+        }
+        class1Performance = Math.min(Math.max(class1Performance, 0), 100);
+        class2Performance = Math.min(Math.max(class2Performance, 0), 100);
+        class3Performance = Math.min(Math.max(class3Performance, 0), 100);
+
+        // Update the HTML elements as previously
+        document.getElementById('happiness').innerText = happiness;
+        document.getElementById('class1Performance').innerText = class1Performance;
+        document.getElementById('class2Performance').innerText = class2Performance;
+        document.getElementById('class3Performance').innerText = class3Performance;
+        
+        // Increment week and year, as per previous code
+        week++
+        if (week === 16) {
+            // End of semester, check for rec letter eligibility
+            if (class1Performance >= 30) recLetterClasses.push(combinedClassNames[0]);
+            if (class2Performance >= 30) recLetterClasses.push(combinedClassNames[1]);
+            if (class3Performance >= 30) recLetterClasses.push(combinedClassNames[2]);
+            
+            // Update the list of rec letter classes
+            let recList = document.getElementById('recLetterClasses');
+            recList.innerHTML = '';
+            recLetterClasses.forEach(cls => {
+                let listItem = document.createElement('li');
+                listItem.innerText = cls;
+                recList.appendChild(listItem);
+            });
+
+            // Switch to winter break mode
+            document.getElementById('classChoices').style.display = 'none';
+            document.getElementById('readIntenselyBtn').style.display = 'block';
+        } else if (week === 20) {
+            // End of winter break, switch back to class mode
+            document.getElementById('classChoices').style.display = 'block';
+            document.getElementById('readIntenselyBtn').style.display = 'none';
+        } else if (week > 52) {
+            week = 1;
+            year++;
+        }
+        document.getElementById('weekCount').innerText = week;
+        document.getElementById('yearCount').innerText = year;
+    }
 
     function takePhd() {
-        // Hide the initial buttons
         document.getElementById('takePhdBtn').style.display = 'none';
         document.getElementById('dontTakePhdBtn').style.display = 'none';
-
-        // Show the field choices.
         document.querySelector('#fieldChoice').style.display = 'block';
     }
 
     function dontTakePhd() {
-    document.body.innerHTML = '<div style="font-size: 24px; font-weight: bold; padding-top: 50px; text-align: center;">Probably a good choice.</div>';
-}
-
+        document.body.innerHTML = '<div style="font-size: 24px; font-weight: bold; padding-top: 50px; text-align: center;">Probably a good choice.</div>';
+    }
 
     function selectSpecialty(s) {
         specialty = s;
-        
         if (s === 'Modernist') {
             document.body.innerHTML = '<div style="font-size: 24px; font-weight: bold; padding-top: 50px; text-align: center;">Eesh. Rough market.</div>';
             return;
         }
-
-        // Update the display with chosen specialty
         document.getElementById('specialtyDisplay').innerText = specialty;
-
-        // Hide field choices and show the status page.
         document.getElementById('fieldChoice').style.display = 'none';
         document.getElementById('statusPage').style.display = 'block';
+
+        initializeGame(); // Add this line
     }
+
+    function getRandomClassNames() {
+    
+    for (let i = 0; i < 3; i++) {
+        let random1 = classes1[Math.floor(Math.random() * classes1.length)];
+        let random2 = classes2[Math.floor(Math.random() * classes2.length)];
+        combinedClassNames.push(random1 + " " + random2);
+    }
+
+    return combinedClassNames;
+}
+
+    function initializeGame() {
+        let classNames = getRandomClassNames();
+
+        for (let i = 0; i < classNames.length; i++) {
+            // Update the button text
+            document.querySelector(`[onclick="performAction('Class ${i + 1}')"]`).innerText = `Work on ${classNames[i]}`;
+            
+            // Update the performance label
+            let performanceLabel = document.getElementById(`class${i + 1}Performance`).parentNode;
+            performanceLabel.innerHTML = `Performance in ${classNames[i]}: <span id="class${i + 1}Performance">0</span>%`;
+        }
+    }
+    function endGame() {
+        document.body.innerHTML = '<div style="font-size: 24px; font-weight: bold; padding-top: 50px; text-align: center;">You got very unhappy and left the academy.</div>';
+    }
+
+
 
     function resetGame() {
-        // Reset the game to its initial state
-        specialty = '';
-        document.getElementById('specialtyDisplay').innerText = '';
-        document.getElementById('yearCount').innerText = '1';
-        document.getElementById('monthCount').innerText = '1';
-        document.getElementById('statusPage').style.display = 'none';
-        document.getElementById('fieldChoice').style.display = 'none';
-        document.getElementById('takePhdBtn').style.display = 'block';
-        document.getElementById('dontTakePhdBtn').style.display = 'block';
-    }
+    // Reset all variables to their initial states
+    week = 1;
+    year = 1;
+    specialty = '';
+    happiness = 50;
+    class1Performance = 0;
+    class2Performance = 0;
+    class3Performance = 0;
+    recLetterClasses = [];
+    combinedClassNames = [];
+    
+    // Reset all displays to their initial states
+    document.getElementById('specialtyDisplay').innerText = '';
+    document.getElementById('happiness').innerText = '50';
+    document.getElementById('class1Performance').innerText = '0';
+    document.getElementById('class2Performance').innerText = '0';
+    document.getElementById('class3Performance').innerText = '0';
+    document.getElementById('weekCount').innerText = '1';
+    document.getElementById('yearCount').innerText = '1';
+    document.getElementById('recLetterClasses').innerHTML = '';
+    
+    document.getElementById('classChoices').style.display = 'block';
+    document.getElementById('readIntenselyBtn').style.display = 'none';
+    
+    document.getElementById('statusPage').style.display = 'none';
+    document.getElementById('takePhdBtn').style.display = 'block';
+    document.getElementById('dontTakePhdBtn').style.display = 'block';
+}
+
+window.onload = initializeGame;
+
 </script>
-
-
-</body>
-
-</html>
