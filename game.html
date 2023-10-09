@@ -208,34 +208,34 @@ function performAction(action) {
 
 
     function resetGame() {
-    // Reset all variables to their initial states
-    week = 1;
-    year = 1;
-    specialty = '';
-    happiness = 50;
-    class1Performance = 0;
-    class2Performance = 0;
-    class3Performance = 0;
-    recLetterClasses = [];
-    combinedClassNames = [];
-    
-    // Reset all displays to their initial states
-    document.getElementById('specialtyDisplay').innerText = '';
-    document.getElementById('happiness').innerText = '50';
-    document.getElementById('class1Performance').innerText = '0';
-    document.getElementById('class2Performance').innerText = '0';
-    document.getElementById('class3Performance').innerText = '0';
-    document.getElementById('weekCount').innerText = '1';
-    document.getElementById('yearCount').innerText = '1';
-    document.getElementById('recLetterClasses').innerHTML = '';
-    
-    document.getElementById('classChoices').style.display = 'block';
-    document.getElementById('readIntenselyBtn').style.display = 'none';
-    
-    document.getElementById('statusPage').style.display = 'none';
-    document.getElementById('takePhdBtn').style.display = 'block';
-    document.getElementById('dontTakePhdBtn').style.display = 'block';
-}
+        // Reset all variables to their initial states
+        week = 1;
+        year = 1;
+        specialty = '';
+        happiness = 50;
+        class1Performance = 0;
+        class2Performance = 0;
+        class3Performance = 0;
+        recLetterClasses = [];
+        combinedClassNames = [];
+        
+        // Reset all displays to their initial states
+        document.getElementById('specialtyDisplay').innerText = '';
+        document.getElementById('happiness').innerText = '50';
+        document.getElementById('class1Performance').innerText = '0';
+        document.getElementById('class2Performance').innerText = '0';
+        document.getElementById('class3Performance').innerText = '0';
+        document.getElementById('weekCount').innerText = '1';
+        document.getElementById('yearCount').innerText = '1';
+        document.getElementById('recLetterClasses').innerHTML = '';
+        
+        document.getElementById('classChoices').style.display = 'block';
+        document.getElementById('readIntenselyBtn').style.display = 'none';
+        
+        document.getElementById('statusPage').style.display = 'none';
+        document.getElementById('takePhdBtn').style.display = 'block';
+        document.getElementById('dontTakePhdBtn').style.display = 'block';
+    }
 
 window.onload = initializeGame;
 
